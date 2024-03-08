@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "solo-tid-project"
+version = "0.1.0"
+description = ""
+authors = ["Pablo Hernández <17086478+Hadronomy@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pandas = "^2.2.1"
+scikit-learn = "^1.4.1.post1"
+black = "^24.2.0"
+matplotlib = "^3.8.3"
+imbalanced-learn = "^0.12.0"
+ipykernel = "^6.29.3"
+seaborn = "^0.13.2"
+notebook = "^7.1.1"
+skops = "^0.9.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
