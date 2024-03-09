@@ -45,6 +45,7 @@
 
   // styling
   show link: it => text(blue, it)
+  show footnote: it => text(blue, it)
 
   set cite(style: "chicago-author-date")
   set bibliography(style: "apa", title: "references")
@@ -68,6 +69,11 @@
   // headings
   set heading(numbering: "1. ")
   show heading.where(level: 1): it => {
+    set align(left)
+    set text(10pt, weight: "semibold")
+    upper(it)
+  }
+  show heading.where(level: 2): it => {
     set align(left)
     set text(10pt, weight: "semibold")
     upper(it)

@@ -25,43 +25,58 @@
 #columns(2)[
 
 = Introduction
-#lorem(80) 
-#link(
-  "https://www.google.com",
-  "Google",
-)
-#footnote[A search engine]
+We will be analyzing a dataset of mortgage applications, 
+with the goal of predicting whether a mortgage application will be approved or denied. 
+For the prediction, we will be using the Decision Tree Classifier#footnote()[
+  More information about the Decision Tree Classifier algorithm can be found in #link("https://en.wikipedia.org/wiki/Decision_tree_learning")
+]
+and Naive Bayes#footnote()[
+  More information about the Naive Bayes algorithm can be found in #link("https://en.wikipedia.org/wiki/Naive_Bayes_classifier")
+],
+each with and without preprocessing, to guide
+us to making the best decision when treating the data.
 
-= Dataset Analysis
+= Dataset Analysis <dataset-analysis>
 #lorem(100)
 
-= Basic Processing
+= Basic Processing <basic-processing>
 #lorem(90)
 #figure(
-  image("example.png"),
+  image("images/example.png"),
   caption: "Image Example",
 )
 #lorem(30)
 
-= Naive Results
-#lorem(400)
+= Naive Results <naive-results>
+#lorem(30)
+
+== Decision Tree Classifier <dtc>
+
+#lorem(50)
 
 #figure(
-  table(
-    columns: (1fr, 1fr, 1fr),
-    rows: 3,
-    [Colum1], [Colum2] ,[Colum3],
-    [Row1], [Row1], [Row1],
-    [Row2], [Row2], [Row2],
-  ),
-  caption: "Table Example",
+  image("images/dtc-cm.png"),
+  caption: "Decision Tree Classifier Confusion Matrix, Without Preprocessing",
 )
+
+#lorem(80)
+
+== Naive Bayes Classifier <nbc>
+
+#lorem(50)
+
+// #figure(
+//   image("images/nbc-cm.png"),
+//   caption: "Image Example",
+// )
+
+#lorem(80)
 
 ]
 
 #figure(
-  image("example-big.jpg"),
-  caption: "Ejemplo de imagen",
+  image("images/dtc-first.png"),
+  caption: "Decision Tree Classifier Without Preprocessing",
 )
 
 #columns(2)[
