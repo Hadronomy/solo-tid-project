@@ -4,6 +4,11 @@
 
 #show: doc => conf(
   title: [Clasificación de Conseción de Hipotecas],
+  abstract: [
+    The process of approving home loans plays a critical role in the financial sector, impacting individuals and economies alike. In this study, we undertake the classification of a home loan approval dataset using two distinct machine learning algorithms: Decision Tree Classifier (DTC) and Naive Bayes. The dataset encompasses various features such as applicant's income, credit history, loan amount, and employment status, among others.
+
+    Our objective is to evaluate the performance of these algorithms in predicting the approval or rejection of home loan applications. We begin by preprocessing the dataset, handling missing values, and encoding categorical variables. Subsequently, we split the dataset into training and testing sets to train the classifiers and assess their performance.
+  ],
   affiliations: (
     (
       name: "Universidad de La Laguna",
