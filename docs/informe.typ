@@ -12,7 +12,7 @@
   affiliations: (
     (
       name: "Universidad de La Laguna",
-      full: "Tratamiento Inteligente de Datos, Escuela Superior de Ingeniería y Tecnología, Universidad de La Laguna, Canarias, España",
+      full: [Tratamiento Inteligente de Datos, Escuela Superior de Ingeniería y Tecnología, #linebreak()Universidad de La Laguna, Canarias, España],
     ),
   ),
   authors: (
@@ -46,10 +46,6 @@ us to making the best decision when treating the data.
 
 = Basic Processing <basic-processing>
 #lorem(90)
-#figure(
-  image("images/example.png"),
-  caption: "Image Example",
-)
 #lorem(30)
 
 = Naive Results <naive-results>
