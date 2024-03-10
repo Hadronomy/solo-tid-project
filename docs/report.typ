@@ -44,7 +44,7 @@ each with and without preprocessing, to guide
 us to making the best decision when treating the data.
 
 = Dataset Analysis <dataset-analysis>
-A quick look at the dataset shows that there are 614 entries and 12 columns.
+A quick look at the dataset shows that there are $614$ entries and $12$ columns.
 
 // Data columns (total 12 columns):
 //  #   Column             Non-Null Count  Dtype  
@@ -95,7 +95,7 @@ A quick look at the dataset shows that there are 614 entries and 12 columns.
   caption: [Dataset Columns],
 )
 
-Out of the 12 columns, 9 of them are of type object, which means they are categorical. Additionally, there are missing values in half of the columns, which we will need to handle before training the classifiers.
+Out of the $12$ columns, $9$ of them are of type object, which means they are categorical. Additionally, there are missing values in half of the columns, which we will need to handle before training the classifiers.
 
 // Loan_ID              614
 // Gender                 2
@@ -129,9 +129,9 @@ Is worth noting that `Loan_ID` is a unique identifier for each entry, and `LoanS
   ],
   kind: table,
   caption: [Unique Values for Non Categorical Columns],
-)<unique-values-non-categorical>
+) <unique-values-non-categorical>
 
-As shown @unique-values-non-categorical, `Loan_ID` has 614 unique values, which is the same as the number of entries in the dataset. 
+As shown @unique-values-non-categorical, `Loan_ID` has $614$ unique values, which is the same as the number of entries in the dataset. 
 This means, as expected that `Loan_ID` is a unique identifier for each entry. 
 The rest of the columns have a lower number of unique values, which means they are not unique for each entry.
 
@@ -165,7 +165,7 @@ This is important because if the dataset is not balanced, the classifiers might 
 #figure(
   image("images/balance.png"),
   caption: "Loan Status Distribution",
-)<loan-status-distribution>
+) <loan-status-distribution>
 
 As seen in @loan-status-distribution the dataset is clearly unbalanced,
 with a majority of the entries being approved loans,
@@ -200,7 +200,7 @@ and then to be trained and tested with the classifiers.
 For the purpose of better training and understanding the classifiers,
 we will be training them with just the basic preprocessing.
 
-The datasets will be evaluated by their
+The classifiers will be evaluated by their
 accuracy, precision, recall, and F1-score.
 
 The training and testing sets will be split with a $70|30$ ratio respectively.
@@ -429,13 +429,241 @@ The best performing classifier at this stage is the Decision Tree Classifier.
 #columns(2)[
 
 = Proper Preprocessing <proper-preprocessing>
-#lorem(120)
+
+Now that we have seen the results of the classifiers without preprocessing,
+we will be training them with proper preprocessing.
+
+The dataset will be preprocessed using the following steps:
+
+#par(first-line-indent: 0em)[
+
++ Dropping the `Loan_ID` column, as it is a unique identifier for each entry.
++ Separating the `LoanStatus` column from the rest of the features.
++ Encoding the categorical features using the One-Hot Encoding technique.
++ Scaling the numerical features using the Standard Scaler.
++ Handling the missing values by imputing the median for the numerical columns and the most frequent value for the categorical columns.
+]
+
+After splitting the dataset into training and testing sets, we will
+find outlier values and balance the training set using the SMOTE#footnote([
+  More information about the SMOTE technique can be found in 
+  #link("https://imbalanced-learn.org/stable/references/generated/imblearn.over_sampling.SMOTE.html")
+]) technique
+This technique will create synthetic samples of the minority class to balance the dataset.
+
+The classifiers will be evaluated by their accuracy, precision, recall, and F1-score.
+
+The training and testing sets will be split with a $60|40$ ratio respectively.
+
 
 = Final Results <final-results>
-#lorem(130)
 
-= Conclusions <conclusions>
-#lorem(80)
+== Decision Tree Classifier <dtc-final>
+
+The Decision Tree Classifier was trained with the following parameters:
+
+#par(first-line-indent: 0em)[
+
+/ criterion: entropy
+/ max_depth: 5, to avoid overfitting
+]
+
+Yielding the following results:
+
+// Accuracy: 0.6382113821138211
+// Precision: 0.6134095640296096
+// Recall: 0.6382113821138211
+// F1 Score: 0.6180512012505862
+
+#figure(
+  tablex(
+    columns: (1fr, auto),
+    align: (left, center),
+    auto-vlines: false,
+    repeat-header: true,
+
+    [*Metric*], [*Score*],
+    [Accuracy], [0.6382113821138211],
+    [Precision], [0.6134095640296096],
+    [Recall], [0.6382113821138211],
+    [F1 Score], [0.6180512012505862],
+  ),
+  kind: table,
+  caption: "Decision Tree Classifier Scores, With Proper Preprocessing",
+) <final-dtc-scores>
+
+#figure(
+  image("images/dtc-final-cm.png"),
+  caption: "Decision Tree Classifier Confusion Matrix, With Proper Preprocessing",
+) <final-dtc-cm>
+
+In this case, the previous results are improved, as shown in @final-dtc-scores compared to @naive-dtc-scores.
+
+#par(first-line-indent: 0em)[
+
+/ Accuracy: the classifier achieves an accuracy of approximately $64%$, indicating that about $64%$ of the home loan applications are correctly classified as either approved or rejected.
+
+/ Precision: with a precision of $0.6134$, around $61%$ of the predicted approvals are indeed correct, while the remaining $39%$ are false positives.
+
+/ Recall: the classifier captures about $64%$ of the actual positive instances, meaning that it misses around $36%$ of the true positives.
+
+/ F1 Score: A value of $0.6181$ suggests that the classifier achieves a reasonable balance between precision and recall.
+]
+
+Also as implied in @final-dtc-scores and clearly seen in @final-dtc-cm,
+the classifier is still biased towards the majority class, but not as
+much as before.
+
+Overall, the trained classifier demonstrates moderately high performance in classifying home loan applications.
+
+]
+
+#figure(
+  image("images/dtc-final.png"),
+  caption: "Decision Tree Classifier With Proper Preprocessing",
+) <final-dtc-graph>
+
+#pagebreak()
+
+#columns(2)[
+
+== Naive Bayes Classifier <nbc-final>
+
+The Naive Bayes Classifier was trained with the following parameters:
+
+#par(first-line-indent: 0em)[
+
+/ priors: None
+/ var_smoothing: $1e-9$
+]
+
+Yielding the following results:
+
+// Accuracy: 0.3699186991869919
+// Precision: 0.5352572985957131
+// Recall: 0.3699186991869919
+// F1 Score: 0.27234284279815585
+
+#figure(
+  tablex(
+    columns: (1fr, auto),
+    align: (left, center),
+    auto-vlines: false,
+    repeat-header: true,
+
+    [*Metric*], [*Score*],
+    [Accuracy], [0.3699186991869919],
+    [Precision], [0.5352572985957131],
+    [Recall], [0.3699186991869919],
+    [F1 Score], [0.27234284279815585],
+  ),
+  kind: table,
+  caption: "Naive Bayes Classifier Scores, With Proper Preprocessing",
+) <final-nbc-scores>
+
+#figure(
+  image("images/nbc-final-cm.png"),
+  caption: "Naive Bayes Classifier Confusion Matrix, With Proper Preprocessing",
+) <final-nbc-cm>
+
+In this case the previous results are improved, as shown in @final-nbc-scores compared to @naive-nbc-scores. But the classifier still struggles to accurately predict the approval or rejection of home loan applications.
+
+#par(first-line-indent: 0em)[
+
+/ Accuracy: the classifier achieves an accuracy of approximately $37%$, indicating that about $37%$ of the home loan applications are correctly classified as either approved or rejected.
+
+/ Precision: with a precision of $0.5353$, around $53%$ of the predicted approvals are indeed correct, while the remaining $47%$ are false positives.
+
+/ Recall: the classifier captures about $37%$ of the actual positive instances, meaning that it misses around $63%$ of the true positives.
+
+/ F1 Score: A value of $0.2723$ suggests that the classifier does not achieve a good balance between precision and recall.
+]
+
+Also as implied in @final-nbc-scores and clearly seen in @final-nbc-cm,
+the classifier is still biased towards the majority class.
+
+Overall, the trained classifier demonstrates poor performance in classifying home loan applications.
+
+#colbreak()
+
+== K-NN Classifier <knn-final>
+
+The K-Nearest Neighbors (K-NN) Classifier was trained with the following parameters:
+
+#par(first-line-indent: 0em)[
+
+/ n_neighbors: 5
+/ weights: uniform
+/ algorithm: auto
+/ leaf_size: 30
+/ p: 2, power parameter for the Minkowski metric.
+/ metric: minkowski
+/ metric_params: None
+/ n_jobs: None
+]
+
+Yielding the following results:
+
+// Accuracy: 0.42276422764227645
+// Precision: 0.4640303290331651
+// Recall: 0.42276422764227645
+// F1 Score: 0.4366383820888397
+
+#figure(
+  tablex(
+    columns: (1fr, auto),
+    align: (left, center),
+    auto-vlines: false,
+    repeat-header: true,
+
+    [*Metric*], [*Score*],
+    [Accuracy], [0.42276422764227645],
+    [Precision], [0.4640303290331651],
+    [Recall], [0.42276422764227645],
+    [F1 Score], [0.4366383820888397],
+  ),
+  kind: table,
+  caption: "K-NN Classifier Scores, With Proper Preprocessing",
+) <final-knn-scores>
+
+#figure(
+  image("images/knn-final-cm.png"),
+  caption: "K-NN Classifier Confusion Matrix, With Proper Preprocessing",
+) <final-knn-cm>
+
+In this case the new results are way worse than the previous ones, as shown in @final-knn-scores compared to @naive-knn-scores.
+
+#par(first-line-indent: 0em)[
+
+/ Accuracy: the classifier achieves an accuracy of approximately $42%$, indicating that about $42%$ of the home loan applications are correctly classified as either approved or rejected.
+
+/ Precision: with a precision of $0.4640$, around $46%$ of the predicted approvals are indeed correct, while the remaining $54%$ are false positives.
+
+/ Recall: the classifier captures about $42%$ of the actual positive instances, meaning that it misses around $58%$ of the true positives.
+
+/ F1 Score: A value of $0.4366$ suggests that the classifier does not achieve a good balance between precision and recall.
+]
+
+Also as implied in @final-knn-scores and clearly seen in @final-knn-cm,
+
+Overall, the trained classifier demonstrates poor performance in classifying home loan applications.
+
+= Final Conclusion <final-conclusion>
+
+After proper preprocessing, the classifiers demonstrate moderate to poor performance in classifying home loan applications.
+
+The best performing classifier at this stage is the Decision Tree Classifier,
+the same as before. The Naive Bayes Classifier performs horribly, and the K-NN Classifier performs poorly.
+
+With a better preprocessing fitted to the dataset, the classifiers still 
+struggle to accurately predict the approval or rejection of home loan applications. The preprocessing has improved the results, but not enough to make the classifiers useful. 
+This indicates that either the dataset has too much noise, 
+or some the classifiers are not suitable for this task. It could also be a
+blunder in the preprocessing, but that is unlikely as the preprocessing
+is quite standard.
+
+In conclusion the classifiers are not suitable for this task, and further
+analysis is needed to find a better model for this dataset.
 
 ]
 
