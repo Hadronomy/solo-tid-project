@@ -126,7 +126,7 @@ Is worth noting that `Loan_ID` is a unique identifier for each entry, and `LoanS
       [LoanAmount], [203],
     )
   ],
-  caption: [Unique Values for non categorical columns],
+  caption: [Unique Values for Non Categorical Columns],
 )<unique-values-non-categorical>
 
 As shown @unique-values-non-categorical, `Loan_ID` has 614 unique values, which is the same as the number of entries in the dataset. 
@@ -150,7 +150,7 @@ The rest of the columns have a lower number of unique values, which means they a
       rowspanx(3)[PropertyArea], [Urban], [Semiurban], [Rural]
     )
   ],
-  caption: [Unique Values for categorical columns],
+  caption: [Unique Values for Categorical Columns],
 )
 
 The unique values in categorical columns are each
