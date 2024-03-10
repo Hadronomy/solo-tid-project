@@ -51,7 +51,21 @@
   set bibliography(style: "apa", title: "references")
   
   // figures
-  show figure: it => {
+  show figure.caption: it => [
+    *#it.supplement #it.counter.display(it.numbering)*: #it.body
+  ]
+  show figure.where(kind: table): it => {
+    set figure.caption(position: top)
+    set align(center)
+    v(12.5pt, weak: true)
+    if it.has("caption") {
+      it.caption
+      v(0.25em)
+    }
+    it.body
+    v(1em)
+  } 
+  show figure.where(kind: image): it => {
     set align(center)
     show: pad.with(x: 13pt)
     v(12.5pt, weak: true)

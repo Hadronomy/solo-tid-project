@@ -91,6 +91,7 @@ A quick look at the dataset shows that there are 614 entries and 12 columns.
       [11], [LoanStatus], [614 non-null], [object],
     )
   ],
+  kind: table,
   caption: [Dataset Columns],
 )
 
@@ -126,6 +127,7 @@ Is worth noting that `Loan_ID` is a unique identifier for each entry, and `LoanS
       [LoanAmount], [203],
     )
   ],
+  kind: table,
   caption: [Unique Values for Non Categorical Columns],
 )<unique-values-non-categorical>
 
@@ -150,6 +152,7 @@ The rest of the columns have a lower number of unique values, which means they a
       rowspanx(3)[PropertyArea], [Urban], [Semiurban], [Rural]
     )
   ],
+  kind: table,
   caption: [Unique Values for Categorical Columns],
 )
 
