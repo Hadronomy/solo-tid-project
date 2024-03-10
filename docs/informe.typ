@@ -211,8 +211,7 @@ The Decision Tree Classifier was trained with the following parameters:
 
 #par(first-line-indent: 0em)[
 / criterion: entropy
-/ max_depth: 5, to avoid overfitting
-#footnote([
+/ max_depth: 5, to avoid overfitting#footnote([
   More information about overfitting can be found in #link(
     "https://www.ibm.com/es-es/topics/overfitting#:~:text=El%20\"overfitting\"%20o%20sobreajuste%20es,a%20sus%20datos%20de%20entrenamiento.",
     "https://www.ibm.com/es-es/topics/overfitting"
