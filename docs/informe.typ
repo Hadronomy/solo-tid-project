@@ -247,7 +247,7 @@ Yielding the following results:
   caption: "Decision Tree Classifier Confusion Matrix, Without Preprocessing",
 ) <naive-dtc-cm>
 
-Analyzing the results in @naive-dtc-scores
+Analyzing the results in @naive-dtc-scores:
 
 #par(first-line-indent: 0em)[
 / Accuracy: represents the proportion of correctly classified instances out of the total instances. In this case, the classifier achieves an accuracy of approximately $65%$, indicating that about $65%$ of the home loan applications are correctly classified as either approved or rejected.
@@ -279,18 +279,154 @@ necessary to enhance its performance.
   caption: "Decision Tree Classifier Without Preprocessing",
 ) <naive-dtc-graph>
 
+#pagebreak()
+
 #columns(2)[
 
 == Naive Bayes Classifier <nbc>
 
-#lorem(50)
+The Naive Bayes Classifier was trained with the following parameters:
 
-// #figure(
-//   image("images/nbc-cm.png"),
-//   caption: "Image Example",
-// )
+#par(first-line-indent: 0em)[
+/ priors: None
+/ var_smoothing: $1e-9$
+]
 
-#lorem(80)
+Yielding the following results:
+
+// Accuracy: 0.3503184713375796
+// Precision: 0.5272944898046424
+// Recall: 0.3503184713375796
+// F1 Score: 0.2262632996693664
+#figure(
+  tablex(
+    columns: (1fr, auto),
+    align: (left, center),
+    auto-vlines: false,
+    repeat-header: true,
+
+    [*Metric*], [*Score*],
+    [Accuracy], [0.3503184713375796],
+    [Precision], [0.5272944898046424],
+    [Recall], [0.3503184713375796],
+    [F1 Score], [0.2262632996693664],
+  ),
+  kind: table,
+  caption: "Naive Bayes Classifier Scores, Without Preprocessing",
+) <naive-nbc-scores>
+
+#figure(
+  image("images/nbc-cm.png"),
+  caption: "Naive Bayes Classifier Confusion Matrix, Without Preprocessing",
+) <naive-nbc-cm>
+
+Analyzing the results in @naive-nbc-scores:
+
+#par(first-line-indent: 0em)[
+/ Accuracy: the classifier achieves an accuracy of approximately $35%$, indicating that about $35%$ of the home loan applications are correctly classified as either approved or rejected.
+
+/ Precision: with a precision of $0.5273$, around $53%$ of the predicted approvals are indeed correct, while the remaining $47%$ are false positives.
+
+/ Recall: the classifier captures about $35%$ of the actual positive instances, meaning that it misses around $65%$ of the true positives.
+
+/ F1 Score: A value of $0.2263$ suggests that the classifier does not achieve a good balance between precision and recall.
+]
+
+Also as implied in @naive-nbc-scores and clearly seen in @naive-nbc-cm, 
+the classifier is biased towards the majority class.
+This is a common issue when dealing with unbalanced datasets,
+and it can be solved by balancing the dataset before training the classifiers.
+
+Overall, the trained classifier demonstrates poor performance in classifying home loan applications.
+The accuracy, precision, recall, and F1 score are all relatively low, 
+indicating that the classifier struggles to accurately predict the approval or rejection of home loan applications.
+
+]
+
+#pagebreak()
+
+#columns(2)[
+
+== K-NN Classifier <knn>
+
+The K-Nearest Neighbors (K-NN) Classifier was trained with the following parameters:
+
+#par(first-line-indent: 0em)[
+/ n_neighbors: 5
+/ weights: uniform
+/ algorithm: auto
+/ leaf_size: 30
+/ p: 2, power parameter for the Minkowski metric.
+/ metric: minkowski
+/ metric_params: None
+/ n_jobs: None
+]
+
+Yielding the following results:
+
+// Accuracy: 0.643312101910828
+// Precision: 0.533648771610555
+// Recall: 0.643312101910828
+// F1 Score: 0.5388802514335389
+
+#figure(
+  tablex(
+    columns: (1fr, auto),
+    align: (left, center),
+    auto-vlines: false,
+    repeat-header: true,
+
+    [*Metric*], [*Score*],
+    [Accuracy], [0.643312101910828],
+    [Precision], [0.533648771610555],
+    [Recall], [0.643312101910828],
+    [F1 Score], [0.5388802514335389],
+  ),
+  kind: table,
+  caption: [K-NN Classifier Scores,#linebreak() Without Preprocessing],
+) <naive-knn-scores>
+
+#figure(
+  image("images/knn-cm.png"),
+  caption: "K-NN Classifier Confusion Matrix, Without Preprocessing",
+) <naive-knn-cm>
+
+Analyzing the results in @naive-knn-scores:
+
+#par(first-line-indent: 0em)[
+/ Accuracy: the classifier achieves an accuracy of approximately $64%$, indicating that about $64%$ of the home loan applications are correctly classified as either approved or rejected.
+
+/ Precision: with a precision of $0.5336$, around $53%$ of the predicted approvals are indeed correct, while the remaining $47%$ are false positives.
+
+/ Recall: the classifier captures about $64%$ of the actual positive instances, meaning that it misses around $36%$ of the true positives.
+
+/ F1 Score: A value of $0.5389$ suggests that the classifier does not achieve a good balance between precision and recall.
+
+]
+
+Also as implied in @naive-knn-scores and clearly seen in @naive-knn-cm,
+the classifier is biased towards the majority class.
+
+Overall, the trained classifier demonstrates moderate performance in classifying home loan applications. 
+There is room for improvement in all metrics. Depending on the specific requirements and objectives of the application, 
+further optimization or fine-tuning of the classifier may be necessary to enhance its performance.
+
+== Conclusions <naive-conclusions>
+
+In conclusion, the classifiers demonstrate moderate to poor performance in
+classifying home loan applications. 
+This is to be expected as the dataset
+has not been preprocessed, and it is unbalanced. 
+The classifiers are biased towards the majority class, and they struggle to
+accurately predict the approval or rejection of home loan applications.
+
+The best performing classifier at this stage is the Decision Tree Classifier.
+
+]
+
+#pagebreak()
+
+#columns(2)[
 
 = Proper Preprocessing <proper-preprocessing>
 #lorem(120)
@@ -302,5 +438,4 @@ necessary to enhance its performance.
 #lorem(80)
 
 ]
-
 
