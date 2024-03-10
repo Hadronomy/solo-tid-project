@@ -176,13 +176,105 @@ as they might be biased towards the majority class and not perform well when pre
 To solve this issue, we will have to balance the dataset before training the classifiers.
 
 = Basic Preprocessing <basic-preprocessing>
-#lorem(90)
-#lorem(30)
+Even if at first we are not going to preprocess the dataset,
+we will have to handle the missing values and encode the categorical features before training the classifiers.
 
-= Naive Results <naive-results>
-#lorem(30)
+Firstly, we will be dropping the `Loan_ID` column, as it is a unique identifier 
+for each entry as it will just mess with the classifiers predictions.
+As the `LoanStatus` column is the target variable, we will be separating it from the rest of the features.
 
-#lorem(80)
+After that, is necessary to handle the missing values. In this
+case is just a basic preprocessing, the rows with missing values will be dropped.
+
+Finally, we will be encoding the categorical features using the One-Hot Encoding
+#footnote([
+  More information about One-Hot Encoding can be found in
+  #link("https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html")
+]) technique.
+
+The dataset is now ready to be split into training and testing sets,
+and then to be trained and tested with the classifiers.
+
+= Initial Results <naive-results>
+
+For the purpose of better training and understanding the classifiers,
+we will be training them with just the basic preprocessing.
+
+The datasets will be evaluated by their
+accuracy, precision, recall, and F1-score.
+
+The training and testing sets will be split with a $70|30$ ratio respectively.
+
+== Decision Tree Classifier <dtc>
+
+The Decision Tree Classifier was trained with the following parameters:
+
+#par(first-line-indent: 0em)[
+/ criterion: entropy
+/ max_depth: 5, to avoid overfitting
+]
+
+Yielding the following results:
+
+// Accuracy: 0.6496815286624203
+// Precision: 0.5837945676843107
+// Recall: 0.6496815286624203
+// F1 Score: 0.5680379528894609
+#figure(
+  tablex(
+    columns: (1fr, auto),
+    align: (left, center),
+    auto-vlines: false,
+    repeat-header: true,
+
+    [*Metric*], [*Score*],
+    [Accuracy], [0.6496815286624203],
+    [Precision], [0.5837945676843107],
+    [Recall], [0.6496815286624203],
+    [F1 Score], [0.5680379528894609],
+  ),
+  kind: table,
+  caption: "Decision Tree Classifier Scores, Without Preprocessing",
+) <naive-dtc-scores>
+
+#figure(
+  image("images/dtc-cm.png"),
+  caption: "Decision Tree Classifier Confusion Matrix, Without Preprocessing",
+) <naive-dtc-cm>
+
+Analyzing the results in @naive-dtc-scores
+
+#par(first-line-indent: 0em)[
+/ Accuracy: represents the proportion of correctly classified instances out of the total instances. In this case, the classifier achieves an accuracy of approximately $65%$, indicating that about $65%$ of the home loan applications are correctly classified as either approved or rejected.
+
+/ Precision: measures the proportion of true positive predictions out of all positive predictions made by the classifier. A precision of $0.5838$ indicates that around $58%$ of the predicted approvals are indeed correct, while the remaining $42%$ are false positives.
+
+/ Recall: also known as sensitivity, measures the proportion of true positive predictions out of all actual positive instances in the dataset. With a recall of $0.6497$, the classifier captures about $65%$ of the actual positive instances, meaning that it misses around $35%$ of the true positives.
+
+/ F1 Score: A value of $0.5680$ suggests that the classifier achieves a reasonable balance between precision and recall.
+]
+
+Also as implied in @naive-dtc-scores and clearly seen in @naive-dtc-cm,
+the classifier is biased towards the majority class.
+This is a common issue when dealing with unbalanced datasets,
+and it can be solved by balancing the dataset before training the classifiers.
+
+Overall, the trained classifier demonstrates moderate performance in classifying home loan applications. 
+While the accuracy is relatively decent, there is room for improvement in terms of
+precision, recall, and F1 score.
+Depending on the specific requirements and objectives of the application,
+further optimization or fine-tuning of the classifier may be
+necessary to enhance its performance.
+
+
+]
+
+#figure(
+  image("images/dtc-first.png"),
+  caption: "Decision Tree Classifier Without Preprocessing",
+) <naive-dtc-graph>
+
+#columns(2)[
 
 == Naive Bayes Classifier <nbc>
 
@@ -194,24 +286,6 @@ To solve this issue, we will have to balance the dataset before training the cla
 // )
 
 #lorem(80)
-
-== Decision Tree Classifier <dtc>
-
-#lorem(50)
-
-#figure(
-  image("images/dtc-cm.png"),
-  caption: "Decision Tree Classifier Confusion Matrix, Without Preprocessing",
-)
-
-]
-
-#figure(
-  image("images/dtc-first.png"),
-  caption: "Decision Tree Classifier Without Preprocessing",
-)
-
-#columns(2)[
 
 = Proper Preprocessing <proper-preprocessing>
 #lorem(120)
