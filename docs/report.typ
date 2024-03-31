@@ -274,10 +274,14 @@ necessary to enhance its performance.
 
 ]
 
+#page(flipped: true)[
+
 #figure(
   image("images/dtc-first.png"),
   caption: "Decision Tree Classifier Without Preprocessing",
 ) <naive-dtc-graph>
+
+]
 
 #pagebreak()
 
@@ -518,10 +522,14 @@ Overall, the trained classifier demonstrates moderately high performance in clas
 
 ]
 
+#page(flipped: true)[
+
 #figure(
   image("images/dtc-final.png"),
   caption: "Decision Tree Classifier With Proper Preprocessing",
 ) <final-dtc-graph>
+
+]
 
 #pagebreak()
 
