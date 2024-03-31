@@ -50,6 +50,10 @@
   set cite(style: "chicago-author-date")
   set bibliography(style: "apa", title: "references")
   
+  // table
+  set table(stroke: (_, y) => if y > 0 { (top: 0.8pt) })
+  show table.cell.where(y: 0): set text(weight: "bold")
+
   // figures
   show figure.caption: it => [
     *#it.supplement #it.counter.display(it.numbering)*: #it.body

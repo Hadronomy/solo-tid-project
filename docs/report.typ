@@ -65,7 +65,7 @@ A quick look at the dataset shows that there are $614$ entries and $12$ columns.
 #colbreak()
 #figure(
   text(8pt)[
-    #tablex(
+    #table(
       columns: (auto, auto, 1fr, auto),
       align: (
         center + horizon,
@@ -73,10 +73,8 @@ A quick look at the dataset shows that there are $614$ entries and $12$ columns.
         center + horizon,
         center + horizon
       ),
-      auto-vlines: false,
-      repeat-header: true,
 
-      [*\#*], [*Columns*], [*Non-Null Count*], [*Dtype*],
+      table.header[\#][Columns][Non-Null Count][Dtype],
       [0], [Loan_ID], [614 non-null], [object],
       [1], [Gender], [601 non-null], [object],
       [2], [Married], [611 non-null], [object],
