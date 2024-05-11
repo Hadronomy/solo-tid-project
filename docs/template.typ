@@ -38,13 +38,14 @@
   } else {
     names.join(", ", last: ", and ")
   }
-  let emails = authors.map(author => author.email)
-  let emails-string = emails.join($", "$)
+  let emails = authors.map(author =>
+    link("mailto:" + author.email)[#author.email]
+  )
+  let emails-string = emails.join(", ")
 
   set document(title: title, author: author-string)
 
   // styling
-  show link: it => text(blue, it)
   show footnote: it => text(blue, it)
 
   set cite(style: "chicago-author-date")
@@ -120,7 +121,8 @@
       ]
 
       #v(1em)
-      #par(justify: false, leading: 20em)[
+      #par(justify: false)[
+        #set text(10pt, weight: "semibold")
         #text(10pt, weight: "semibold")[
           #author-string
         ]
@@ -140,12 +142,14 @@
       #v(1em)
       #text(9pt)[
         E-mail: 
-        #text(8pt, style: "italic")[#emails-string]
+        #show link: it => text(fill: black, it)
+        #text(8pt, style: "italic", fill: black)[#emails-string]
       ]
 
       // abstract
     ]
   ]
+
 
   par(justify: false)[
     #text(10pt, weight: "semibold")[
@@ -160,5 +164,8 @@
   
   set text(10pt)
   set align(left)
-  doc
+  [
+    #show link: it => text(blue, it)
+    #doc
+  ]
 }
